@@ -1,0 +1,1 @@
+enableCamShake false;

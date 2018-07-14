@@ -1,0 +1,21 @@
+
+https://forums.bistudio.com/topic/176729-vas-supply-drop-in-multiplayer/#post2846355
+
+Tested, and working in MP
+
+Put this in your init.sqf
+
+FNC_AddVASAction = 
+
+	{
+
+		_this addAction["<t color='#ff11ff'>Virtual Ammobox</t>", "VAS\open.sqf"];
+
+	};
+
+
+
+Then after you spawn your Ammobox add this line.
+
+[_supplyBox,"Fnc_AddVASAction",nil,true] spawn BIS_fnc_MP;
+
