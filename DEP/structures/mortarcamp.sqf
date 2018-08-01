@@ -87,8 +87,8 @@ _gunner moveInGunner _gun;
 _totalenemies = _totalenemies + 1;
 
 {
-	_x addCuratorEditableObjects [units _groups, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [units _campgroup, false];
+	_x addCuratorEditableObjects [_objects,false];
 } foreach adminCurators;
 
 [_totalenemies, _groups, _objects];

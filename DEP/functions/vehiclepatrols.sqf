@@ -146,6 +146,7 @@ dep_fnc_spawn_vehiclepatrol =
 
 	{
 		_x addCuratorEditableObjects [[_vehicle], true];
+		_x addCuratorEditableObjects [units _group, false];
 	} foreach adminCurators;
 
     

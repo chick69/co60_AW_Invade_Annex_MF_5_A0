@@ -92,7 +92,7 @@ for "_c" from 1 to (1 + round (random 1)) do {
 
 {
 	_x addCuratorEditableObjects [units _campgroup, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [_objects,false];
 } foreach adminCurators;
 
 [_totalenemies,_groups,_objects];

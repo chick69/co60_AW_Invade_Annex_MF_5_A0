@@ -26,6 +26,8 @@ MHHQ=compile preprocessfilelinenumbers "CHHQ.sqf";
 [] execVM "outlw_magRepack\MagRepack_init_sv.sqf";
 [] execVM "DEP\init.sqf";
 [] execVM "MF\mf_grenadeStop.sqf";
+[] execVM "GF_Earplugs\Credits.sqf";	// Please keep the Credits or add them to your Diary
+[] execVM "GF_Earplugs\GF_Earplugs.sqf";
 [] execVM "MF\mf_hello.sqf";
 
 // Virtual arsenal

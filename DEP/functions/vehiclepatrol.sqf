@@ -83,7 +83,7 @@ _y = 0;
 	_y = _y + 1;
 } forEach _waypoints;
 {
-	_x addCuratorEditableObjects [units _group, true];
+	_x addCuratorEditableObjects [units _group, false];
 } foreach adminCurators;
 
 true;

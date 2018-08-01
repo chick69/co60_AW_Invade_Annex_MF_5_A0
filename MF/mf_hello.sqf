@@ -28,7 +28,8 @@ _info7 = parseText " Troll , Tk volontaires, Insultes et autres comportements in
 //_don2 = parseText "Vous pouvez aider à maintenir le serveur en effectuant des donations via notre site web.";
 //_don3 = parseText "Les donations servent à maintenir le serveur, le Teamspeack et le Site.";
 
-_txt = composeText [_title,_separator,_imageFile,_separator,_ts,_separator,_infox,_info,_info1,_info2,_info3,_info4,_info5,_info6,_info7,_don,_don1,_don2,_don3];
+//_txt = composeText [_title,_separator,_imageFile,_separator,_ts,_separator,_infox,_info,_info1,_info2,_info3,_info4,_info5,_info6,_info7,_don,_don1,_don2,_don3];
+_txt = composeText [_title,_separator,_imageFile,_separator,_ts,_separator,_infox,_info,_info1,_info2,_info3,_info4,_info5,_info6,_info7];
 hintSilent _txt;
 
 _displayCount = _displayCount + 1;

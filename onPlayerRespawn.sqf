@@ -56,6 +56,7 @@ player setVariable ["seated",FALSE];
 player allowSprint true;
 player setCustomAimCoef 0.6;
 player setUnitRecoilCoefficient 0.6;
+enableEnvironment [false, true];	  
 
 player addAction ["Clear vehicle inventory",QS_fnc_actionClearInventory,[],-97,FALSE,FALSE,'','[] call QS_fnc_conditionClearInventory'];
 

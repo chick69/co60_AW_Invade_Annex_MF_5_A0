@@ -12,7 +12,6 @@ Description:
 
 	Client scripts and event handlers.
 ______________________________________________________*/
-
 enableSentences FALSE;															
 enableSaving [FALSE,FALSE];
 player enableFatigue FALSE;
@@ -33,6 +32,7 @@ for [ {_i = 0}, {_i < count(paramsArray)}, {_i = _i + 1} ] do {
 _uid = getPlayerUID player;
 _name = str player;
 _playername = name player;
+
 //
 if( _uid != "_SP_PLAYER_" ) then {
 	player globalchat "Bienvenu/Welcome : "+ _playername;
@@ -61,7 +61,6 @@ if( _uid != "_SP_PLAYER_" ) then {
 
 _null = [] execVM "scripts\restrictions.sqf"; 									// gear restrictions and safezone
 0 = [] execVM "MF\MF_jump.sqf";
-_null = [] execVM "MF\earplugs.sqf";	
 _null = [] execVM "MF\mf_pilotCheck.sqf"; 									// pilots/copilots only
 call compile preprocessFile "MF\Options\InitOptions.sqf";											// jump action
 _null = [] execVM "scripts\misc\diary.sqf";										// diary tabs	

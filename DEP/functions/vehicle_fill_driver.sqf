@@ -32,4 +32,5 @@ for "_y" from 1 to (_vehicle emptyPositions "Driver") do {
 };
 {
 	_x addCuratorEditableObjects [[_vehicle], true];
+	_x addCuratorEditableObjects [units _group, true];
 } foreach adminCurators;

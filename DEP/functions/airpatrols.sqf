@@ -88,6 +88,7 @@ dep_fnc_spawn_air =
 
 	{
 		_x addCuratorEditableObjects [[_vehicle], true];
+		_x addCuratorEditableObjects [units _group, false];
 	} foreach adminCurators;
 	
 	_vehicle;
