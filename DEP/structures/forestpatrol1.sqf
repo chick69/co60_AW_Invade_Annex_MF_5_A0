@@ -16,13 +16,14 @@
 */
 // This file spawns a forest patrol at the given location.
 params ['_location'];
-private ["_pos","_radius","_paths","_path","_temp","_wp1","_wp2","_minepos","_group","_wp","_soldier","_soldiername","_groups","_totalenemies","_objects","_houses","_formation"];
+private ["_pos","_radius","_paths","_path","_temp","_wp1","_wp2","_minepos","_group","_wp","_soldier","_soldiername","_groups","_totalenemies","_objects","_houses","_formation","_LocObj"];
 _pos = _location select 0;
 _radius = _location select 2;
 
 _groups = [];
 _totalenemies = 0;
 _objects = [];
+_LocObj = [];
 
 _group = createGroup dep_side;
 _groups = _groups + [_group];
@@ -53,6 +54,7 @@ if (dep_mines && (random 1) < 0.4) then {
     _mine = createMine ["APERSTripMine", _minepos, [], 0];
     _temp = [_minepos] call dep_fnc_slopedir;
     _mine setDir _temp;
+	_LocObj = _LocObj + [_mine];
 };
 
 _formation = dep_formations call BIS_fnc_selectRandom;
@@ -109,8 +111,8 @@ _wp setWaypointTimeOut [10,20,40];
 _wp setWaypointType "CYCLE";
 
 {
-	_x addCuratorEditableObjects [units _groups, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [units _group, false];
+	_x addCuratorEditableObjects [_LocObj, false];
 } foreach adminCurators;
 
 [_totalenemies, _groups, _objects];

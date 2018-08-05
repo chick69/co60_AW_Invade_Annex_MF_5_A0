@@ -15,13 +15,14 @@
     along with Dynamic Enemy Population.  If not, see <http://www.gnu.org/licenses/>.
 */
 // This file spawns a roadblock at the given location.
-private ["_pos", "_dir", "_newpos", "_campgroup", "_soldier", "_groups", "_totalenemies", "_objects","_spawnpos"];
+private ["_pos", "_dir", "_newpos", "_campgroup", "_soldier", "_groups", "_totalenemies", "_objects","_spawnpos","_LocObj"];
 _pos    = _this select 0; // roadblock position
 _dir    = _this select 1; // roadblock direction
 
 _groups = [];
 _totalenemies = 0;
 _objects = [];
+_LocObj = [];
 
 _campgroup = createGroup dep_side;
 _groups = _groups + [_campgroup];
@@ -55,6 +56,7 @@ _objs = [
 	["Land_CncBarrier_stripes_F",[6.80811,-6.146,0],0,1,0,[],"","",true,false]
 ];
 _return = [_pos, _dir, _objs] call BIS_fnc_ObjectsMapper;
+_LocObj = _LocObj + _return;
 
 _gun1 = [gun1, gun2, gun3, gun4] call BIS_fnc_selectRandom;
 
@@ -104,7 +106,8 @@ _totalenemies = _totalenemies + 1;
 
 {
 	_x addCuratorEditableObjects [units _groups, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [_objects,false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies, _groups, _objects];

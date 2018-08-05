@@ -26,7 +26,6 @@ BTC_assign_actions =
 };
 BTC_get_gear =
 {
-/* --------------------------------------------------------
 	private ["_array_mag","_id","_display_name","_count","_array_class","_array_bullet","_array_class_x","_array_bullet_x","_r_mag_d","_h_mag_d","_brack"];
 	_unit = _this select 0;
 	_gear = [];
@@ -101,8 +100,6 @@ BTC_get_gear =
 	//diag_log text format ["------------------------------------------",""];
 	//{diag_log text format ["%1",_x]} foreach _gear;
 	//diag_log text format ["------------------------------------------",""];
-	----------------------------------- */
-	_gear = getUnitLoadout _unit;
 	_gear
 };
 BTC_set_gear =
@@ -127,7 +124,6 @@ BTC_set_gear =
 		_fire_mode,15
 		_ammo
 	];*/
-	/* --------------------------------------------
 	_unit = _this select 0;
 	_gear = _this select 1;
 	_id = 0;
@@ -194,8 +190,6 @@ BTC_set_gear =
 	if (count (_gear select 10) > 0) then {{if (_x != "") then {_unit addHandgunItem _x;};} foreach (_gear select 10);};
 	_unit selectweapon (_gear select 14);
 	if ((_gear select 15) != -1) then {player action ["SWITCHWEAPON", player, player, (_gear select 15)];};
-	------------------------- */
-	player setUnitLoadout (BTC_gear);
 };
 
 BTC_fnc_handledamage_gear =

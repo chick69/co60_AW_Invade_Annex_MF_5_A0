@@ -18,7 +18,12 @@ ______________________________________________________*/
 call compile preprocessFile "scripts\=BTC=_revive\=BTC=_revive_init.sqf";		// revive
 call compile preprocessFileLineNumbers "SHK_pos\shk_pos_init.sqf";
 
+vts_debug=false;
+vts_nettype=1;
 
+// fonctions Communes appelable depuis ZEUS
+_script=[] execvm "functions\vtsfunctions.sqf";waitUntil {scriptDone _script};
+// -----
 //-------------------------------------------------- Headless Client
 
 MHHQ=compile preprocessfilelinenumbers "CHHQ.sqf";
@@ -39,8 +44,6 @@ FNC_AddVASAction =
 
 //bUG MAJ ARMA 3 SHAKING
 enableCamShake false;
-
-call compile preprocessFile "scripts\=BTC=_revive\=BTC=_revive_init.sqf";		// revive
 
 if (isServer) then {
 [] execVM "MF\real_weather.sqf";};

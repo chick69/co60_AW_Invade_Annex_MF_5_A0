@@ -16,7 +16,7 @@
 */
 // This file spawns barracks type 1.
 
-private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_building","_totalenemies","_groups","_objects"];
+private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_building","_totalenemies","_groups","_objects","_locObj"];
 _pos 				= _this select 0; // Camp position
 _dir 				= _this select 1; // Camp direction
 
@@ -29,43 +29,53 @@ if !(isNull _road) then {
 _totalenemies = 0;
 _groups = [];
 _objects = [];
+_locObj = [];
 
 _building = (["Land_Cargo_HQ_V1_F","Land_Cargo_HQ_V2_F","Land_Cargo_HQ_V3_F"] call BIS_fnc_selectRandom) createVehicle _pos;
 _building setDir (_dir);
+_LocObj = _LocObj + [_building];
 
 _newpos = [_building, 13, _dir] call BIS_fnc_relPos;
 _prop = "Land_HBarrier_5_F" createVehicle _newpos;
 _prop setDir (_dir);
+_LocObj = _LocObj + [_prop];
 
 _newpos = [_building, 13, (_dir + 90)] call BIS_fnc_relPos;
 _prop = "Land_HBarrierBig_F" createVehicle _newpos;
 _prop setDir (_dir + 90);
+_LocObj = _LocObj + [_prop];
 
 _newpos = [_building, 13, (_dir + 180)] call BIS_fnc_relPos;
 _prop = "Land_HBarrier_5_F" createVehicle _newpos;
 _prop setDir (_dir + 180);
+_LocObj = _LocObj + [_prop];
 
 _newpos = [_building, 13, (_dir + 270)] call BIS_fnc_relPos;
 _prop = "Land_HBarrierBig_F" createVehicle _newpos;
 _prop setDir (_dir + 270);
+_LocObj = _LocObj + [_prop];
 
 if ((random 1) < 0.5) then
 {
     _newpos = [_building, 15, (_dir + 45)] call BIS_fnc_relPos;
     _prop = "Land_HBarrier_5_F" createVehicle _newpos;
     _prop setDir (_dir + 45);
+	_LocObj = _LocObj + [_prop];
 
     _newpos = [_building, 15, (_dir + 135)] call BIS_fnc_relPos;
     _prop = "Land_HBarrier_5_F" createVehicle _newpos;
     _prop setDir (_dir + 135);
+	_LocObj = _LocObj + [_prop];
 
     _newpos = [_building, 15, (_dir + 225)] call BIS_fnc_relPos;
     _prop = "Land_HBarrier_5_F" createVehicle _newpos;
     _prop setDir (_dir + 225);
+	_LocObj = _LocObj + [_prop];
 
     _newpos = [_building, 15, (_dir + 315)] call BIS_fnc_relPos;
     _prop = "Land_HBarrier_5_F" createVehicle _newpos;
     _prop setDir (_dir + 315);
+	_LocObj = _LocObj + [_prop];
 };
 
 _buildpos = _building call dep_fnc_buildingpositions;
@@ -116,7 +126,8 @@ doStop (units _campgroup);
 
 {
 	_x addCuratorEditableObjects [units _campgroup, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [_objects,false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies,_groups,_objects];

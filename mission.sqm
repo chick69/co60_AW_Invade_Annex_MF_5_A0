@@ -8,7 +8,7 @@ class EditorData
 	toggles=522;
 	class ItemIDProvider
 	{
-		nextID=4884;
+		nextID=4886;
 	};
 	class MarkerIDProvider
 	{
@@ -437,7 +437,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=1879;
+		items=1881;
 		class Item0
 		{
 			dataType="Marker";
@@ -2439,7 +2439,7 @@ class Mission
 			};
 			id=2707;
 			type="B_MRAP_01_hmg_F";
-			atlOffset=0.00018334389;
+			atlOffset=-2.3841858e-007;
 		};
 		class Item175
 		{
@@ -38824,6 +38824,32 @@ class Mission
 			colorName="ColorBlue";
 			id=4882;
 			atlOffset=-5.865097e-005;
+		};
+		class Item1879
+		{
+			dataType="Marker";
+			position[]={42.535,0.090999998,-6717.4321};
+			name="EvCircle";
+			markerType="ELLIPSE";
+			type="Empty";
+			colorName="ColorEAST";
+			fillName="FDiagonal";
+			a=750;
+			b=750;
+			id=4884;
+			atlOffset=186.061;
+		};
+		class Item1880
+		{
+			dataType="Marker";
+			position[]={1121.093,0.088,-6315.3042};
+			name="EvMarker";
+			text="Event MF";
+			type="o_unknown";
+			a=0.5;
+			b=0.5;
+			id=4885;
+			atlOffset=186.058;
 		};
 	};
 	class Connections

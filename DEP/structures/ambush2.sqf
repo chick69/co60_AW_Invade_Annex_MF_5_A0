@@ -15,20 +15,21 @@
     along with Dynamic Enemy Population.  If not, see <http://www.gnu.org/licenses/>.
 */
 // This file spawns an ambush at the given location.
-private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_gate", "_groups", "_totalenemies", "_objects", "_wrecks", "_wreck"];
+private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_gate", "_groups", "_totalenemies", "_objects", "_wrecks", "_wreck","_LocObj"];
 _pos    = _this select 0;
 _dir    = _this select 1;
 
 _groups = [];
 _totalenemies = 0;
 _objects = [];
+_LocObj = [];
 
 _wrecks = ["Land_Wreck_HMMWV_F","Land_Wreck_Offroad_F","Land_Wreck_Offroad2_F","Land_Wreck_Truck_dropside_F","Land_Wreck_Truck_F","Land_Wreck_UAZ_F","Land_Wreck_Van_F"];
 
 _newpos = [_pos, 2, (_dir + 90)] call BIS_fnc_relPos;
 _wreck = (_wrecks call BIS_fnc_selectRandom) createVehicle _newpos;
 _wreck setDir _dir;
-
+_LocObj = _LocObj + [_wreck];
 if (((random 1) <= dep_ied_chance) && dep_ieds) then 
 {
 	_wreck setVariable ["workingon",false,true];
@@ -79,8 +80,7 @@ if (dep_mines) then
 };
 
 {
-	_x addCuratorEditableObjects [[_wreck], false];
-	_x addCuratorEditableObjects [[_mine],false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies, _groups, _objects];

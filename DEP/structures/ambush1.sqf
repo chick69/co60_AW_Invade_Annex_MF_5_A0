@@ -15,13 +15,14 @@
     along with Dynamic Enemy Population.  If not, see <http://www.gnu.org/licenses/>.
 */
 // This file spawns an ambush at the given location.
-private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_gate", "_groups", "_totalenemies", "_objects"];
+private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_gate", "_groups", "_totalenemies", "_objects","_LocObj"];
 _pos    = _this select 0;
 _dir    = _this select 1;
 
 _groups = [];
 _totalenemies = 0;
 _objects = [];
+_LocObj = [];
 
 if ((random 1) < 0.5 && dep_mines) then 
 {
@@ -32,6 +33,7 @@ if ((random 1) < 0.5 && dep_mines) then
 		_m = createMarker[format["ambush%1", (str _newpos)], _newpos];
 		_m setMarkerType "Minefield";
 	};
+	_LocObj = _LocObj + [_mine];
 };
 
 _campgroup = createGroup dep_side;
@@ -60,7 +62,8 @@ if (_y < 4) then { _y = 4; };
 
 {
 	_x addCuratorEditableObjects [units _campgroup, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [_objects,false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies, _groups, _objects];

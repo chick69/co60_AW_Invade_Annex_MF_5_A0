@@ -16,13 +16,14 @@
 */
 // This file spawns a mortar camp.
 
-private ["_pos", "_dir", "_gun", "_campgroup", "_gunner", "_groups", "_totalenemies", "_objects","_spawnpos"];
+private ["_pos", "_dir", "_gun", "_campgroup", "_gunner", "_groups", "_totalenemies", "_objects","_spawnpos","_LocObj"];
 _pos    = _this select 0; // position
 _dir    = _this select 1; // direction
 
 _groups = [];
 _totalenemies = 0;
 _objects = [];
+_LocObj = [];
 
 _campgroup = createGroup dep_side;
 _groups = _groups + [_campgroup];
@@ -54,6 +55,7 @@ _objs =
 	["Land_WoodenCrate_01_stack_x5_F",[-4.31763,-4.03076,0],337.302,1,0,[],"","",true,false]
 ];
 _return = [_pos, _dir, _objs] call BIS_fnc_ObjectsMapper;
+_LocObj = _LocObj + _return;
 
 _spawnpos = [_pos, 30, true] call dep_fnc_scriptedspawnpos;
 _spawnpos = _spawnpos select 0;

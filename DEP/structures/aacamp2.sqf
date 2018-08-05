@@ -15,7 +15,7 @@
     along with Dynamic Enemy Population.  If not, see <http://www.gnu.org/licenses/>.
 */
 // This file spawns anti air camp 2.
-private ["_pos", "_dir", "_newpos", "_campgroup", "_soldier", "_ammo","_totalenemies","_groups","_objects"];
+private ["_pos", "_dir", "_newpos", "_campgroup", "_soldier", "_ammo","_totalenemies","_groups","_objects","_LocObj"];
 _pos = _this select 0; // Camp position
 _dir = _this select 1; // Camp direction
 
@@ -28,6 +28,7 @@ if !(isNull _road) then {
 _totalenemies = 0;
 _groups = [];
 _objects = [];
+_LocObj = [];
 
 _campgroup = createGroup dep_side;
 _campgroup setFormDir _dir + 180;
@@ -46,6 +47,7 @@ _objs = [
 	["Land_BagFence_01_round_green_F",[-0.0498047,5.92432,-0.00130129],180,1,0,[],"","",true,false]
 ];
 _return = [_pos, _dir, _objs] call BIS_fnc_ObjectsMapper;
+_LocObj = _LocObj + _return;
 
 _newpos = getPos aa1;
 _newdir = getDir aa1;
@@ -75,6 +77,7 @@ _newpos = _pos findEmptyPosition[0, 10, dep_box_launchers];
 if ((count _newpos) == 3) then {
     _ammo = dep_box_launchers createVehicle _newpos;
     _ammo setDir _dir;
+	_LocObj = _LocObj + [_ammo];
 };
 
 _newpos = _pos findEmptyPosition[0, 20, dep_u_sl];
@@ -93,7 +96,8 @@ for "_c" from 1 to (ceil random (dep_max_ai_loc - _totalenemies)) do
 
 {
 	_x addCuratorEditableObjects [units _campgroup, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [_objects,false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies,_groups,_objects];

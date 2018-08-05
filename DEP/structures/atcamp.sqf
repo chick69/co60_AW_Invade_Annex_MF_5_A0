@@ -16,13 +16,14 @@
 */
 // This file spawns an AT camp.
 
-private ["_pos", "_dir", "_newpos", "_newdir", "_campgroup", "_prop", "_soldier", "_numberofbarriers","_totalenemies","_groups","_objects"];
+private ["_pos", "_dir", "_newpos", "_newdir", "_campgroup", "_prop", "_soldier", "_numberofbarriers","_totalenemies","_groups","_objects","_LocObj"];
 _pos = _this select 0; // Camp position
 _dir = _this select 1; // Camp direction
 
 _totalenemies = 0;
 _groups = [];
 _objects = [];
+_LocObj = [];
 
 _campgroup = createGroup dep_side;
 _campgroup setFormDir _dir;
@@ -59,6 +60,7 @@ if (random 1 < 0.5) then {
     _gunner1 moveInGunner _gun1;
     _gunner1 setDir _dir;
     _totalenemies = _totalenemies + 1;
+	_LocObj = _LocObj + [_gun1];
 };
 
 if ((random 1) < 0.6) then
@@ -71,11 +73,13 @@ if ((random 1) < 0.6) then
         _prop = "Land_CncBarrier_F" createVehicle _newpos;
         _prop setDir _newdir;
         _newdir = _newdir + (360 / _numberofbarriers);
+		_LocObj = _LocObj + [_prop];
     };
 };
 
 _prop = ([dep_box_ammo, dep_box_special, dep_box_weapons, dep_box_ord] call BIS_fnc_selectRandom) createVehicle _pos;
 _prop setDir _dir;
+_LocObj = _LocObj + [_prop];
 
 _soldier = [_campgroup, dep_u_g_sl, _pos] call dep_fnc_createunit;
 doStop _soldier;
@@ -93,8 +97,7 @@ for "_c" from 1 to (1 + round (random 1)) do {
 
 {
 	_x addCuratorEditableObjects [units _campgroup, false];
-	_x addCuratorEditableObjects [[_prop],false];
-	_x addCuratorEditableObjects [[_gun1],true];
+	_x addCuratorEditableObjects [_LocObj,true];
 } foreach adminCurators;
 
 [_totalenemies,_groups,_objects];

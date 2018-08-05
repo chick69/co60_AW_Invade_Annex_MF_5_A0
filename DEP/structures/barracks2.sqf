@@ -16,7 +16,7 @@
 */
 // This file spawns barracks type 2.
 
-private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_fire","_totalenemies","_groups","_objects","_enemypositions"];
+private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_fire","_totalenemies","_groups","_objects","_enemypositions","_LocObj"];
 _pos 				= _this select 0; // Camp position
 _dir 				= _this select 1; // Camp direction
 
@@ -29,6 +29,7 @@ if !(isNull _road) then {
 _totalenemies = 0;
 _groups = [];
 _objects = [];
+_LocObj=[];
 
 _prop = "Land_ClutterCutter_medium_F" createVehicle _pos;
 _fire = "Campfire_burning_F" createVehicle _pos;
@@ -36,19 +37,24 @@ _fire = "Campfire_burning_F" createVehicle _pos;
 _newpos = [_fire, 1, (_dir + 270)] call BIS_fnc_relPos;
 _prop = "Land_WoodenLog_F" createVehicle _newpos;
 _prop = (["Land_BakedBeans_F","Land_Canteen_F","Land_CerealsBox_F","Land_Matches_F"] call BIS_fnc_selectRandom) createVehicle _newpos;
+_LocObj = _LocObj + [_prop];
 
 _newpos = [_fire, 11, (_dir + 90)] call BIS_fnc_relPos;
 _prop = (["Land_i_Stone_HouseSmall_V1_F", "Land_i_Stone_HouseSmall_V2_F", "Land_i_Stone_HouseSmall_V3_F"] call BIS_fnc_selectRandom) createVehicle _newpos;
 _prop setDir (_dir + 90);
+_LocObj = _LocObj + [_prop];
 _enemypositions = _prop call dep_fnc_buildingpositions;
 
 _newpos = [_fire, 6, (_dir + 90)] call BIS_fnc_relPos;
 _prop = "Land_WoodenTable_large_F" createVehicle _newpos;
 _prop setDir _dir;
+_LocObj = _LocObj + [_prop];
 
 _newpos = [_fire, 13, (_dir)] call BIS_fnc_relPos;
 _prop = (["Land_i_Stone_Shed_V1_F", "Land_i_Stone_Shed_V2_F", "Land_i_Stone_Shed_V3_F"] call BIS_fnc_selectRandom) createVehicle _newpos;
 _prop setDir (_dir);
+_LocObj = _LocObj + [_prop];
+
 _buildpos = _prop call dep_fnc_buildingpositions;
 _enemypositions = _enemypositions + _buildpos;
 
@@ -65,6 +71,7 @@ if ((random 1) < 0.5) then
     _prop = (dep_civ_veh call BIS_fnc_selectRandom) createVehicle _newpos;
     _prop setDir _dir;
     _prop setFuel (1 - (random 1));
+	_LocObj = _LocObj + [_prop];
 };
 
 _campgroup = createGroup dep_side;
@@ -98,8 +105,9 @@ doStop (units _campgroup);
 } forEach(units _campgroup);
 
 {
-	_x addCuratorEditableObjects [units _groups, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [units _campgroup, false];
+	_x addCuratorEditableObjects [_objects,false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies,_groups,_objects];

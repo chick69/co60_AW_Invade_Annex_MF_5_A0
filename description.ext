@@ -70,6 +70,55 @@ class CfgFunctions
 class RscTitles
 {
 	#include "scripts\vehicle\crew\namesleft.hpp"	// Occupants HUD for vehicles
+	class vts_spymask 
+	{	
+		idd = 19459;
+		enableSimulation = 1;
+		enableDisplay = 1;
+		onLoad = "uiNamespace setVariable [""vts_spyhud_id"", _this select 0]";
+		duration = 2147483647;
+		fadein = 0;
+		fadeout = 0;
+		class RscPicture;	
+		class controls 
+		{	
+			class vts_spymaskpicture: RscPicture
+			{
+				idc = 1200;
+				type = 0;
+				style = 48;		
+				text = "vts_mask.paa";
+				x = 0.650684 * safezoneW + safezoneX;
+				y = 0.0100911 * safezoneH + safezoneY;
+				w = 0.0656411 * safezoneW;
+				h = 0.0979818 * safezoneH;
+				colorText[] = {1,1,1,0.75};
+				colorBackground[] = {0, 0, 0, 0.0};
+				font = "TahomaB";
+				sizeEx = 0;
+				lineSpacing = 0;
+				fixedWidth = 0;
+				shadow = 0;		
+			};
+		};
+	};
+};
+
+class CfgSounds
+{
+	sounds[] = {computer,reveal};
+	class computer
+	{
+		name = "computer";
+		sound[] = {"sound\computer.ogg", 1, 1};
+		titles[] = {"computer"};
+	};
+	class reveal
+	{
+		name = "reveal";
+		sound[] = {"sound\MGS.ogg", 1, 1};
+		titles[] = {"reveal"};
+	};	
 };
 
 class faction {

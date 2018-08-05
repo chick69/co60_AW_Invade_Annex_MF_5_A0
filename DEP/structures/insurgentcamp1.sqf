@@ -16,13 +16,14 @@
 */
 // This file spawns an insurgent camp.
 
-private ["_pos", "_dir", "_newpos", "_newdir", "_campgroup", "_prop", "_soldier", "_numberofbarriers","_totalenemies","_groups","_objects"];
+private ["_pos", "_dir", "_newpos", "_newdir", "_campgroup", "_prop", "_soldier", "_numberofbarriers","_totalenemies","_groups","_objects","_LocObj"];
 _pos = _this select 0; // Camp position
 _dir = _this select 1; // Camp direction
 
 _totalenemies = 0;
 _groups = [];
 _objects = [];
+_LocObj = [];
 
 _campgroup = createGroup dep_side;
 _campgroup setFormDir _dir;
@@ -31,6 +32,7 @@ _groups = _groups + [_campgroup];
 _fire = "Campfire_burning_F" createVehicle _pos;
 _newpos = [_pos, 2, (_dir - 70)] call BIS_fnc_relPos;
 _prop = "Land_WoodPile_F" createVehicle _newpos;
+_LocObj = _LocObj + [_prop];
 
 _newpos = [_pos, 5, _dir] call BIS_fnc_relPos;
 _gun1 = dep_static_hmg_tri createVehicle _newpos;
@@ -47,9 +49,11 @@ _totalenemies = _totalenemies + 1;
 _newpos = [_pos, 5, (_dir + 70)] call BIS_fnc_relPos;
 _prop = "Land_Sleeping_bag_F" createVehicle _newpos;
 _prop setDir (_dir + 90);
+_LocObj = _LocObj + [_prop];
 _newpos = [_pos, 5, (_dir + 110)] call BIS_fnc_relPos;
 _prop = "Land_TentDome_F" createVehicle _newpos;
 _prop setDir (_dir + 90);
+_LocObj = _LocObj + [_prop];
 
 for "_e" from 1 to 3 do {
     _newpos = (getPos _fire) findEmptyPosition [0,20];
@@ -73,7 +77,8 @@ doStop (units _campgroup);
 
 {
 	_x addCuratorEditableObjects [units _groups, false];
-	_x addCuratorEditableObjects [[_objects],false];
+	_x addCuratorEditableObjects [_objects,false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies,_groups,_objects];

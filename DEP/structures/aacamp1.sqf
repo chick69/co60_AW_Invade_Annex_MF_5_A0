@@ -15,7 +15,7 @@
     along with Dynamic Enemy Population.  If not, see <http://www.gnu.org/licenses/>.
 */
 // This file spawns anti air camp 1.
-private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_housepos","_totalenemies","_groups","_objects"];
+private ["_pos", "_dir", "_newpos", "_campgroup", "_prop", "_soldier", "_housepos","_totalenemies","_groups","_objects","_LocObj"];
 _pos = _this select 0; // Camp position
 _dir = _this select 1; // Camp direction
 
@@ -28,6 +28,7 @@ if !(isNull _road) then {
 _totalenemies = 0;
 _groups = [];
 _objects = [];
+_LocObj = [];
 
 _campgroup = createGroup dep_side;
 _campgroup setFormDir _dir;
@@ -35,34 +36,26 @@ _groups = _groups + [_campgroup];
 
 _housepos = [_pos, 7, _dir - 90] call BIS_fnc_relPos;
 _prop = "Land_Cargo_House_V3_F" createVehicle _housepos;
+_LocObj = _LocObj + [_prop];
 _prop setDir _dir - 90;
-{
-	_x addCuratorEditableObjects [[_prop],false];
-} foreach adminCurators;
 
 _newpos = [_pos, 6, _dir + 90] call BIS_fnc_relPos;
 _newpos = [_newpos, 3, _dir] call BIS_fnc_relPos;
 _prop = "Land_HBarrier_5_F" createVehicle _newpos;
 _prop setDir _dir + 90;
-{
-	_x addCuratorEditableObjects [[_prop],false];
-} foreach adminCurators;
+_LocObj = _LocObj + [_prop];
 
 _newpos = [_pos, 6, _dir + 90] call BIS_fnc_relPos;
 _newpos = [_newpos, 3, _dir + 180] call BIS_fnc_relPos;
 _prop = "Land_HBarrier_5_F" createVehicle _newpos;
 _prop setDir _dir + 90;
-{
-	_x addCuratorEditableObjects [[_prop],false];
-} foreach adminCurators;
+_LocObj = _LocObj + [_prop];
 
 _barrels = ["Land_BarrelWater_grey_F", "Land_BarrelEmpty_grey_F", "Land_GarbageBarrel_01_F", "Land_BarrelTrash_grey_F"];
 _newpos = [_housepos, 4, _dir + 200] call BIS_fnc_relPos;
 _prop = (_barrels call BIS_fnc_selectRandom) createVehicle _newpos;
 _prop setDir _dir;
-{
-	_x addCuratorEditableObjects [[_prop],false];
-} foreach adminCurators;
+_LocObj = _LocObj + [_prop];
 
 _newpos = _pos findEmptyPosition[0, 20, dep_static_aa];
 _gun1 = dep_static_aa createVehicle _newpos;
@@ -93,6 +86,7 @@ for "_c" from 1 to (1 + round (random 1)) do {
 {
 	_x addCuratorEditableObjects [units _campgroup, false];
 	_x addCuratorEditableObjects [_objects,false];
+	_x addCuratorEditableObjects [_LocObj,false];
 } foreach adminCurators;
 
 [_totalenemies,_groups,_objects];

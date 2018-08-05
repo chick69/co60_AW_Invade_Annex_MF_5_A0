@@ -57,8 +57,7 @@ if( _uid != "_SP_PLAYER_" ) then {
 		["epicFail",false,2] call BIS_fnc_endMission;
 	}; 
 };
-
-
+//
 _null = [] execVM "scripts\restrictions.sqf"; 									// gear restrictions and safezone
 0 = [] execVM "MF\MF_jump.sqf";
 _null = [] execVM "MF\mf_pilotCheck.sqf"; 									// pilots/copilots only
@@ -169,4 +168,8 @@ if (MFRETEXTURING) then
 };
 waitUntil {time > 1};
 enableEnvironment [false, true];	  
-
+//
+_PlugsTakenHint  = "<t color='#ff9d00' size='1.3' shadow='1' shadowColor='#000000' align='center'>*** Earplugs Received ***  </t>";   //Item taken hint.     
+_howtoHint = "<t  size='1' shadow='1' shadowColor='#000000' align='center'>   [Pause/Break] key to Insert and Remove </t>";          //Instructions hint.
+hint parseText (_PlugsTakenHint + _howtoHint);   
+//
