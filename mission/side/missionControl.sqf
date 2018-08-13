@@ -37,7 +37,6 @@ _loopTimeout = 10 + (random 10);
 //	"underWater",
 //	"sauverjournaliste"
 
-
 _missionList = [	
 	"LABsyn",
 	"destroyUrban",
@@ -46,6 +45,7 @@ _missionList = [
 	"HQind",
 	"HQresearch",
 	"priorityAA",	
+	"prioritySAM",	
 	"priorityARTY",
 	"secureChopper",
 	"secureIntelUnit",
