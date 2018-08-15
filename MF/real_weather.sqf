@@ -48,7 +48,7 @@
 	_timesync = 60;
 
 	// Mission starting date is 25/09/2013 at 12:00
-	_startingdate = [2017, 12, 01, 05, 00];
+	_startingdate = [2018, 06, 06, 05, 00];
 
 	// Mission starting weather "CLEAR|CLOUDY|RAIN";
 	_startingweather = ["CLOUDY","RAIN", "CLEAR"] call BIS_fnc_selectRandom;

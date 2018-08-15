@@ -1,0 +1,1 @@
+player setPosATL [(getmarkerPos "liberty_tp") select 0, (getmarkerPos "liberty_tp") select 1, 182.5];

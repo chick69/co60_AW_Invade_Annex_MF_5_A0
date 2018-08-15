@@ -135,6 +135,12 @@ enableEngineArtillery false;
 if (player isKindOf "B_support_Mort_f") then {
 	enableEngineArtillery true;
 };
+
+if (player isKindOf "B_recon_JTAC_F") then {
+	enableEngineArtillery true;
+};
+
+
 _infoArray = squadParams player;    
 _infoSquad = _infoArray select 0;
 _squad = _infoSquad select 1;

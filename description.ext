@@ -6,7 +6,7 @@
 //------------------------- On Load
 
 author = Rarek, AhoyWorld, Quiksilver Modif MF PROPHET;					// Visible when loading mission
-onLoadName = "MF Invade & Annex 5.A0.12_7a";						// Visible when loading mission
+onLoadName = "MF Invade & Annex 5.A0.12_8b";						// Visible when loading mission
 OnLoadMission = "Welcome back to the home of Invade and Annex ... Join us on TeamSpeak at mercenaires-francais.fr or 91.121.110.172";
 loadScreen = "media\images\loading.paa";				// Visible when loading mission
 overviewPicture = "media\images\loading.paa";			// Visible when selecting mission	

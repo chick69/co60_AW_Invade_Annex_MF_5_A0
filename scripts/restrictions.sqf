@@ -17,7 +17,7 @@ private ["_opticsAllowed","_specialisedOptics","_optics","_basePos","_firstRun",
 #define SOPT_MSG "SOS and LRPS are designated for Snipers and Spotters only. Optic removed."
 
 //===== UAV TERMINAL
-_uavOperator = ["B_soldier_UAV_F","B_officer_F"];
+_uavOperator = ["B_soldier_UAV_F","B_officer_F","B_recon_JTAC_F"];
 _uavRestricted = ["B_UavTerminal","O_UavTerminal","I_UavTerminal"];
 //===== AT / MISSILE LAUNCHERS (excl RPG)
 _missileSoldiers = ["B_soldier_LAT_F","B_soldier_AA_F","B_soldier_AT_F","B_officer_F","B_recon_LAT_F"];
@@ -61,7 +61,7 @@ if (_firstRun) then {
 	};
 };
 
-restrict_Thermal = false;
+restrict_Thermal = true;
 restrict_LMG = false;
 restrict_sOptics = false;
 if (PARAMS_rThermal != 0) then {restrict_Thermal = true;};

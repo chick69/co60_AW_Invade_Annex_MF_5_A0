@@ -1,7 +1,7 @@
 _unit = _this select 1;
 _typeOf = typeOf _unit;
 _okOk = 0;
-_reserved_slots = ["B_recon_JTAC_F","B_Pilot_F"]; // List des users autorisés
+_reserved_slots = ["B_recon_JTAC_F","B_Pilot_F","B_T_Pilot_F"]; // List des users autorisés
 
 if (_typeOf in _reserved_slots) then {
 	if (isNil "JET") then {
